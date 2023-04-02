@@ -1,0 +1,91 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+//YOUR CODE HERE
+class MobilePhone{
+private:
+    char model[20];
+    int modelNumber;
+    int year;
+public:
+    MobilePhone(){}
+    MobilePhone(char *_model, int _modelNumber, int _year){
+        strcpy(model, _model);
+        modelNumber=_modelNumber;
+        year=_year;
+    }
+    MobilePhone(const MobilePhone &mp){
+        strcpy(model, mp.model);
+        modelNumber = mp.modelNumber;
+        year = mp.year;
+    }
+    ~MobilePhone(){}
+
+    char *getModel(){
+        return model;
+    }
+    int getModelNumber(){
+        return modelNumber;
+    }
+    int getYear(){
+        return year;
+    }
+    void print(){
+        cout<<model<<" "<<modelNumber<<" release year: "<<year<<endl;
+    }
+};
+
+class Owner{
+private:
+    char name[20];
+    char surname[20];
+    MobilePhone telefon;
+public:
+    Owner(){}
+    Owner(char *_name, char *_surname, MobilePhone _telefon){
+        strcpy(name, _name);
+        strcpy(surname,_surname);
+        telefon = _telefon;
+    }
+    ~Owner(){}
+
+    void print(){
+        cout<<name<<" "<<surname<<" has a mobile phone:"<<endl;
+        telefon.print();
+    }
+};
+
+
+//DO NOT CHANGE THE MAIN FUNCTION
+int main() {
+    char model[20];
+    int modelNumber;
+    int year;
+    char name[20];
+    char surname[20];
+
+    int testCase;
+
+    cin>>testCase;
+
+    cin>>model;
+    cin>>modelNumber;
+    cin>>year;
+    cin>>name;
+    cin>>surname;
+
+    if(testCase==1){
+        MobilePhone mobilePhone(model,modelNumber,year);
+
+        Owner owner(name,surname,mobilePhone);
+        owner.print();
+    }
+    if(testCase==2){
+        MobilePhone mobilePhone(MobilePhone(model,modelNumber,year));
+
+        Owner owner(name,surname,mobilePhone);
+        owner.print();
+    }
+
+}
